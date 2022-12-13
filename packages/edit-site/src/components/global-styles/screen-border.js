@@ -18,7 +18,7 @@ function ScreenBorder( { name, variationPath = '' } ) {
 	const hasShadowPanel = useHasShadowControl( name );
 	return (
 		<>
-			<ScreenHeader title={ __( 'Border' ) } />
+			<ScreenHeader title={ __( 'Border & Shadow' ) } />
 			<BlockPreviewPanel name={ name } variation={ variationClassName } />
 			{ hasBorderPanel && (
 				<BorderPanel name={ name } variationPath={ variationPath } />
