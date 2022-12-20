@@ -418,6 +418,19 @@ class WP_HTML_Tag_Processor_Test extends WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers get_attribute
+	 * @covers set_attribute
+	 * @covers get_updated_html
+	 */
+	public function test_get_attribute_finds_attribute_added_by_set_attribute() {
+		$p = new WP_HTML_Tag_Processor( self::HTML_SIMPLE );
+		$p->next_tag();
+		$p->set_attribute( 'test-attribute', 'test-value' );
+		$this->assertSame( '<div test-attribute="test-value" id="first"><span id="second">Text</span></div>', $p->get_updated_html() );
+		$this->assertSame( 'test-value', $p->get_attribute( 'test-attribute' ) );
+	}
+
+	/**
 	 * @ticket 56299
 	 *
 	 * @covers set_attribute
