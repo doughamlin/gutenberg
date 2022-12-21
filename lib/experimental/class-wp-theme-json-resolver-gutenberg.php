@@ -43,7 +43,7 @@ class WP_Theme_JSON_Resolver_Gutenberg extends WP_Theme_JSON_Resolver_6_2 {
 			} else {
 				$theme_json_data = array();
 			}
-			$theme_json_data = gutenberg_add_registered_webfonts_to_theme_json( $theme_json_data );
+			$theme_json_data = gutenberg_add_registered_fonts_to_theme_json( $theme_json_data );
 
 			/**
 			 * Filters the data provided by the theme for global styles & settings.
@@ -59,7 +59,7 @@ class WP_Theme_JSON_Resolver_Gutenberg extends WP_Theme_JSON_Resolver_6_2 {
 				$parent_theme_json_file = static::get_file_path_from_theme( 'theme.json', true );
 				if ( '' !== $parent_theme_json_file ) {
 					$parent_theme_json_data = static::read_json_file( $parent_theme_json_file );
-					$parent_theme_json_data = gutenberg_add_registered_webfonts_to_theme_json( $parent_theme_json_data );
+					$parent_theme_json_data = gutenberg_add_registered_fonts_to_theme_json( $parent_theme_json_data );
 					$parent_theme           = new WP_Theme_JSON_Gutenberg( $parent_theme_json_data );
 
 					/*

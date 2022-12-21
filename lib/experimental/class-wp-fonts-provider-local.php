@@ -2,32 +2,29 @@
 /**
  * Fonts API: Provider for locally-hosted fonts.
  *
- * Part of the backwards-compatibility (BC) layer for all
- * deprecated publicly exposed methods and functionality.
- *
- * This class/file will NOT be backported to Core. Rather for sites
- * using the previous API, it exists to prevent breakages, giving
- * developers time to upgrade their code.
- *
  * @package    WordPress
- * @subpackage Fonts
- * @since      X.X.X
+ * @subpackage onts
+ * @since      6.0.0
  */
 
-if ( class_exists( 'WP_Webfonts_Provider_Local' ) ) {
+if ( class_exists( 'WP_Fonts_Provider_Local' ) ) {
 	return;
 }
 
 /**
- * A deprecated core bundled provider for generating `@font-face` styles
+ * A core bundled provider for generating `@font-face` styles
  * from locally-hosted font files.
  *
- * BACKPORT NOTE: Do not backport this file to Core.
+ * This provider builds an optimized `src` (for browser support)
+ * and then generates the `@font-face` styles.
  *
- * @since X.X.X
- * @deprecated X.X.X Use `WP_Fonts_Provider_Local` instead.
+ * All know-how (business logic) for how to interact with and
+ * generate styles from locally-hosted font files is contained
+ * in this provider.
+ *
+ * @since 6.0.0
  */
-class WP_Webfonts_Provider_Local extends WP_Webfonts_Provider {
+class WP_Fonts_Provider_Local extends WP_Fonts_Provider {
 
 	/**
 	 * The provider's unique ID.
@@ -44,8 +41,6 @@ class WP_Webfonts_Provider_Local extends WP_Webfonts_Provider {
 	 * @since 6.1.0
 	 */
 	public function __construct() {
-		deprecated_function( __METHOD__, 'X.X.X', 'WP_Fonts_Provider_Local' );
-
 		if (
 			function_exists( 'is_admin' ) && ! is_admin()
 			&&
@@ -60,46 +55,7 @@ class WP_Webfonts_Provider_Local extends WP_Webfonts_Provider {
 	 *
 	 * This method does the following processing tasks:
 	 *    1. Orchestrates an optimized `src` (with format) for browser support.
-	 *    2. Generates the `@font-face` for all its webfonts.
-	 *
-	 * For example, when given these webfonts:
-	 * <code>
-	 * array(
-	 *      'source-serif-pro.normal.200 900' => array(
-	 *          'provider'    => 'local',
-	 *          'font_family' => 'Source Serif Pro',
-	 *          'font_weight' => '200 900',
-	 *          'font_style'  => 'normal',
-	 *          'src'         => 'https://example.com/wp-content/themes/twentytwentytwo/assets/fonts/source-serif-pro/SourceSerif4Variable-Roman.ttf.woff2' ),
-	 *      ),
-	 *      'source-serif-pro.italic.400 900' => array(
-	 *          'provider'    => 'local',
-	 *          'font_family' => 'Source Serif Pro',
-	 *          'font_weight' => '200 900',
-	 *          'font_style'  => 'italic',
-	 *          'src'         => 'https://example.com/wp-content/themes/twentytwentytwo/assets/fonts/source-serif-pro/SourceSerif4Variable-Italic.ttf.woff2' ),
-	 *      ),
-	 * )
-	 * </code>
-	 *
-	 * the following `@font-face` styles are generated and returned:
-	 * <code>
-	 *
-	 * @font-face{
-	 *      font-family:"Source Serif Pro";
-	 *      font-style:normal;
-	 *      font-weight:200 900;
-	 *      font-stretch:normal;
-	 *      src:local("Source Serif Pro"), url('/assets/fonts/source-serif-pro/SourceSerif4Variable-Roman.ttf.woff2') format('woff2');
-	 * }
-	 * @font-face{
-	 *      font-family:"Source Serif Pro";
-	 *      font-style:italic;
-	 *      font-weight:200 900;
-	 *      font-stretch:normal;
-	 *      src:local("Source Serif Pro"), url('/assets/fonts/source-serif-pro/SourceSerif4Variable-Italic.ttf.woff2') format('woff2');
-	 * }
-	 * </code>
+	 *    2. Generates the `@font-face` for all its fonts.
 	 *
 	 * @since X.X.X
 	 *
@@ -108,12 +64,12 @@ class WP_Webfonts_Provider_Local extends WP_Webfonts_Provider {
 	public function get_css() {
 		$css = '';
 
-		foreach ( $this->webfonts as $webfont ) {
-			// Order the webfont's `src` items to optimize for browser support.
-			$webfont = $this->order_src( $webfont );
+		foreach ( $this->fonts as $font ) {
+			// Order the font's `src` items to optimize for browser support.
+			$font = $this->order_src( $font );
 
-			// Build the @font-face CSS for this webfont.
-			$css .= '@font-face{' . $this->build_font_face_css( $webfont ) . '}';
+			// Build the @font-face CSS for this font.
+			$css .= '@font-face{' . $this->build_font_face_css( $font ) . '}';
 		}
 
 		return $css;
@@ -122,20 +78,20 @@ class WP_Webfonts_Provider_Local extends WP_Webfonts_Provider {
 	/**
 	 * Order `src` items to optimize for browser support.
 	 *
-	 * @since 6.0.0
+	 * @since X.X.X
 	 *
-	 * @param array $webfont Webfont to process.
+	 * @param array $font Font to process.
 	 * @return array
 	 */
-	private function order_src( array $webfont ) {
-		if ( ! is_array( $webfont['src'] ) ) {
-			$webfont['src'] = (array) $webfont['src'];
+	private function order_src( array $font ) {
+		if ( ! is_array( $font['src'] ) ) {
+			$font['src'] = (array) $font['src'];
 		}
 
 		$src         = array();
 		$src_ordered = array();
 
-		foreach ( $webfont['src'] as $url ) {
+		foreach ( $font['src'] as $url ) {
 			// Add data URIs first.
 			if ( str_starts_with( trim( $url ), 'data:' ) ) {
 				$src_ordered[] = array(
@@ -187,33 +143,33 @@ class WP_Webfonts_Provider_Local extends WP_Webfonts_Provider {
 				'format' => 'opentype',
 			);
 		}
-		$webfont['src'] = $src_ordered;
+		$font['src'] = $src_ordered;
 
-		return $webfont;
+		return $font;
 	}
 
 	/**
 	 * Builds the font-family's CSS.
 	 *
-	 * @since 6.0.0
+	 * @since X.X.X
 	 *
-	 * @param array $webfont Webfont to process.
+	 * @param array $font Font to process.
 	 * @return string This font-family's CSS.
 	 */
-	private function build_font_face_css( array $webfont ) {
+	private function build_font_face_css( array $font ) {
 		$css = '';
 
 		// Wrap font-family in quotes if it contains spaces
 		// and is not already wrapped in quotes.
 		if (
-			str_contains( $webfont['font-family'], ' ' ) &&
-			! str_contains( $webfont['font-family'], '"' ) &&
-			! str_contains( $webfont['font-family'], "'" )
+			str_contains( $font['font-family'], ' ' ) &&
+			! str_contains( $font['font-family'], '"' ) &&
+			! str_contains( $font['font-family'], "'" )
 		) {
-			$webfont['font-family'] = '"' . $webfont['font-family'] . '"';
+			$font['font-family'] = '"' . $font['font-family'] . '"';
 		}
 
-		foreach ( $webfont as $key => $value ) {
+		foreach ( $font as $key => $value ) {
 
 			// Skip "provider", since it's for internal API use,
 			// and not a valid CSS property.
@@ -223,7 +179,7 @@ class WP_Webfonts_Provider_Local extends WP_Webfonts_Provider {
 
 			// Compile the "src" parameter.
 			if ( 'src' === $key ) {
-				$value = $this->compile_src( $webfont['font-family'], $value );
+				$value = $this->compile_src( $font['font-family'], $value );
 			}
 
 			// If font-variation-settings is an array, convert it to a string.

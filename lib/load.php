@@ -99,15 +99,18 @@ require __DIR__ . '/experimental/navigation-theme-opt-in.php';
 require __DIR__ . '/experimental/navigation-page.php';
 require __DIR__ . '/experimental/kses.php';
 
-// Web Fonts API.
-require __DIR__ . '/experimental/webfonts-deprecations.php'; // Temporary deprecated functions.
-require __DIR__ . '/experimental/class-wp-webfonts.php'; // Temporary deprecated class.
-require __DIR__ . '/experimental/class-wp-webfonts-utils.php';
-require __DIR__ . '/experimental/register-webfonts-from-theme-json.php';
-require __DIR__ . '/experimental/class-wp-web-fonts.php';
-require __DIR__ . '/experimental/class-wp-webfonts-provider.php';
-require __DIR__ . '/experimental/class-wp-webfonts-provider-local.php';
-require __DIR__ . '/experimental/webfonts.php';
+// Fonts API.
+require __DIR__ . '/experimental/webfonts-deprecations.php'; // Deprecated functions for temporary BC layer.
+require __DIR__ . '/experimental/class-wp-webfonts.php'; // Deprecated class for temporary BC layer.
+require __DIR__ . '/experimental/class-wp-fonts-utils.php';
+require __DIR__ . '/experimental/register-fonts-from-theme-json.php';
+require __DIR__ . '/experimental/class-wp-fonts.php';
+require __DIR__ . '/experimental/class-wp-fonts-provider.php';
+require __DIR__ . '/experimental/class-wp-fonts-provider-local.php';
+require __DIR__ . '/experimental/fonts.php';
+require __DIR__ . '/experimental/class-wp-webfonts-provider.php'; // Deprecated class for temporary BC layer.
+require __DIR__ . '/experimental/class-wp-webfonts-provider-local.php'; // Deprecated class for temporary BC layer.
+
 
 // Plugin specific code.
 require __DIR__ . '/class-wp-theme-json-gutenberg.php';

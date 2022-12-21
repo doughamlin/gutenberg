@@ -8,7 +8,7 @@
  * developers time to upgrade their code.
  *
  * @since      X.X.X
- * @subpackage WebFonts
+ * @subpackage Fonts
  * @package    WordPress
  */
 
@@ -22,6 +22,9 @@ if ( class_exists( 'WP_Webfonts' ) ) {
  * BACKPORT NOTE: Do not backport this file to Core.
  * This class exists to give extenders guidance and time to upgrade their code
  * to use the new Web Fonts API.
+ *
+ * @since X.X.X
+ * @deprecated X.X.X Use `WP_Fonts` instead.
  */
 class WP_Webfonts extends WP_Dependencies {
 
@@ -29,7 +32,7 @@ class WP_Webfonts extends WP_Dependencies {
 	 * Gets the font slug.
 	 *
 	 * @since X.X.X
-	 * @deprecated Use WP_Webfonts_Utils::convert_font_family_into_handle() or WP_Webfonts_Utils::get_font_family_from_variation().
+	 * @deprecated Use WP_Fonts_Utils::convert_font_family_into_handle() or WP_Fonts_Utils::get_font_family_from_variation().
 	 *
 	 * @param array|string $to_convert The value to convert into a slug. Expected as the web font's array
 	 *                                 or a font-family as a string.
@@ -37,8 +40,8 @@ class WP_Webfonts extends WP_Dependencies {
 	 */
 	public static function get_font_slug( $to_convert ) {
 		$message = is_array( $to_convert )
-			? 'Use WP_Webfonts_Utils::get l_font_family_from_variation() to get the font family from an array and then WP_Webfonts_Utils::convert_font_family_into_handle() to convert the font-family name into a handle'
-			: 'Use WP_Webfonts_Utils::convert_font_family_into_handle() to convert the font-family name into a handle';
+			? 'Use WP_Fonts_Utils::get l_font_family_from_variation() to get the font family from an array and then WP_Fonts_Utils::convert_font_family_into_handle() to convert the font-family name into a handle'
+			: 'Use WP_Fonts_Utils::convert_font_family_into_handle() to convert the font-family name into a handle';
 		_deprecated_function( __METHOD__, 'X.X.X', $message );
 
 		return static::_get_font_slug( $to_convert );
@@ -115,10 +118,10 @@ class WP_Webfonts extends WP_Dependencies {
 		}
 
 		// When font family's handle is not passed, attempt to get it from the variation.
-		if ( ! WP_Webfonts_Utils::is_defined( $font_family_handle ) ) {
-			$font_family = WP_Webfonts_Utils::get_font_family_from_variation( $webfont );
+		if ( ! WP_Fonts_Utils::is_defined( $font_family_handle ) ) {
+			$font_family = WP_Fonts_Utils::get_font_family_from_variation( $webfont );
 			if ( $font_family ) {
-				$font_family_handle = WP_Webfonts_Utils::convert_font_family_into_handle( $font_family );
+				$font_family_handle = WP_Fonts_Utils::convert_font_family_into_handle( $font_family );
 			}
 		}
 
@@ -151,60 +154,60 @@ class WP_Webfonts extends WP_Dependencies {
 	 * Migrates deprecated webfonts structure into new API data structure,
 	 * i.e. variations grouped by their font-family.
 	 *
-	 * @param array $webfonts Array of webfonts to migrate.
+	 * @param array $fonts Array of fonts to migrate.
 	 * @return array
 	 */
-	public function migrate_deprecated_structure( array $webfonts ) {
-		$message = 'A deprecated web fonts array structure passed to wp_register_webfonts(). ' .
+	public function migrate_deprecated_structure( array $fonts ) {
+		$message = 'A deprecated fonts array structure passed to wp_register_fonts(). ' .
 			'Variations must be grouped and keyed by their font family.';
 		trigger_error( $message, E_USER_DEPRECATED );
 
-		$new_webfonts = array();
-		foreach ( $webfonts as $webfont ) {
-			$font_family = WP_Webfonts_Utils::get_font_family_from_variation( $webfont );
+		$new_fonts = array();
+		foreach ( $fonts as $font ) {
+			$font_family = WP_Fonts_Utils::get_font_family_from_variation( $font );
 			if ( ! $font_family ) {
 				continue;
 			}
 
-			if ( ! isset( $new_webfonts[ $font_family ] ) ) {
-				$new_webfonts[ $font_family ] = array();
+			if ( ! isset( $new_fonts[ $font_family ] ) ) {
+				$new_fonts[ $font_family ] = array();
 			}
 
-			$new_webfonts[ $font_family ][] = $webfont;
+			$new_fonts[ $font_family ][] = $font;
 		}
 
-		return $new_webfonts;
+		return $new_fonts;
 	}
 
 	/**
-	 * Determines if the given webfonts array is the deprecated array structure.
+	 * Determines if the given fonts array is the deprecated array structure.
 	 *
-	 * @param array $webfonts Array of webfonts to check.
+	 * @param array $fonts Array of fonts to check.
 	 * @return bool True when deprecated structure, else false.
 	 */
-	public function is_deprecated_structure( array $webfonts ) {
+	public function is_deprecated_structure( array $fonts ) {
 		// Checks the first key to determine if it's empty or non-string.
-		foreach ( $webfonts as $font_family => $variations ) {
-			return ! WP_Webfonts_Utils::is_defined( $font_family );
+		foreach ( $fonts as $font_family => $variations ) {
+			return ! WP_Fonts_Utils::is_defined( $font_family );
 		}
 	}
 
 	/**
-	 * Handle the deprecated web fonts structure.
+	 * Handle the deprecated fonts structure.
 	 *
-	 * @param array  $webfont Web font for extracting font family.
+	 * @param array  $font Web font for extracting font family.
 	 * @param string $message Deprecation message to throw.
 	 * @return string|null The font family slug if successfully registered. Else null.
 	 */
-	protected function extract_font_family_from_deprecated_webfonts_structure( array $webfont, $message ) {
+	protected function extract_font_family_from_deprecated_webfonts_structure( array $font, $message ) {
 		trigger_error( $message, E_USER_DEPRECATED );
 
-		$font_family = WP_Webfonts_Utils::get_font_family_from_variation( $webfont );
+		$font_family = WP_Fonts_Utils::get_font_family_from_variation( $font );
 		if ( ! $font_family ) {
 			return null;
 		}
 
-		return WP_Webfonts_Utils::convert_font_family_into_handle( $font_family );
+		return WP_Fonts_Utils::convert_font_family_into_handle( $font_family );
 	}
 
 	/**
@@ -217,9 +220,9 @@ class WP_Webfonts extends WP_Dependencies {
 	 * @return string|false The font slug on success, or false if the font-family cannot be determined.
 	 */
 	private static function _get_font_slug( $to_convert ) {
-		$font_family_name = is_array( $to_convert ) ? WP_Webfonts_Utils::get_font_family_from_variation( $to_convert ) : $to_convert;
+		$font_family_name = is_array( $to_convert ) ? WP_Fonts_Utils::get_font_family_from_variation( $to_convert ) : $to_convert;
 		return ! empty( $font_family_name )
-			? WP_Webfonts_Utils::convert_font_family_into_handle( $font_family_name )
+			? WP_Fonts_Utils::convert_font_family_into_handle( $font_family_name )
 			: false;
 	}
 
