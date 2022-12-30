@@ -113,17 +113,20 @@ function renderShadowToggle() {
 function ShadowPopoverContainer( { shadow, onShadowChange } ) {
 	const [ defaultShadows ] = useSetting( 'shadow.palette.default' );
 	const [ themeShadows ] = useSetting( 'shadow.palette.theme' );
+	const [ defaultPaletteEnabled ] = useSetting( 'shadow.defaultPalette' );
 
 	return (
 		<div className="edit-site-global-styles__shadow-panel">
 			<VStack spacing={ 4 }>
 				<Heading level={ 5 }>{ __( 'Drop shadows' ) }</Heading>
-				<ShadowPresets
-					label={ __( 'Default' ) }
-					presets={ defaultShadows }
-					activeShadow={ shadow }
-					onSelect={ onShadowChange }
-				/>
+				{ defaultPaletteEnabled && (
+					<ShadowPresets
+						label={ __( 'Default' ) }
+						presets={ defaultShadows }
+						activeShadow={ shadow }
+						onSelect={ onShadowChange }
+					/>
+				) }
 				<ShadowPresets
 					label={ __( 'Theme' ) }
 					presets={ themeShadows }

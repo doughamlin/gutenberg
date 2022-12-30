@@ -187,6 +187,7 @@
 			"text": true
 		},
 		"shadow": {
+			"defaultPalette": true,
 			"palette": [
 				{
 					"name": "Natural",
