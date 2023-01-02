@@ -8,6 +8,10 @@
 ### Enhancement
 -   It's now possible to run PHPUnit tests on PHP 8.1 and 8.2.
 
+## 5.9.0 (2023-01-02)
+
+## 5.8.0 (2022-12-14)
+
 ## 5.7.0 (2022-11-16)
 
 ## 5.6.0 (2022-11-02)
