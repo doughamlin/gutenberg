@@ -6,7 +6,7 @@ import {
 	__experimentalNavigatorButton as NavigatorButton,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { layout, symbolFilled } from '@wordpress/icons';
+import { layout, symbolFilled, navigation } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -21,6 +21,16 @@ export default function SidebarNavigationScreenMain() {
 			title={ __( 'Design' ) }
 			content={
 				<ItemGroup>
+					{ !! window?.__experimentalEnableOffCanvasNavigationEditor && (
+						<NavigatorButton
+							as={ SidebarNavigationItem }
+							path="/navigation"
+							withChevron
+							icon={ navigation }
+						>
+							{ __( 'Navigation' ) }
+						</NavigatorButton>
+					) }
 					<NavigatorButton
 						as={ SidebarNavigationItem }
 						path="/templates"

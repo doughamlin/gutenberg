@@ -1,17 +1,15 @@
-.edit-site-sidebar-navigation-item.components-item {
+.edit-site-sidebar-navigation-screen__content .edit-site-navigation-inspector .components-button {
 	color: $gray-600;
-	border-width: $border-width-tab;
 
 	&:hover,
-	&:focus {
+	&:focus,
+	&[aria-current] {
 		color: $white;
 		background: $gray-800;
 		border-width: $border-width-tab;
 	}
+}
 
-	&[aria-current] {
-		color: $white;
-		background: var(--wp-admin-theme-color);
-		border-width: $border-width-tab;
-	}
+.edit-site-sidebar-navigation-screen__content .block-editor-list-view-block-select-button {
+	cursor: grab;
 }
