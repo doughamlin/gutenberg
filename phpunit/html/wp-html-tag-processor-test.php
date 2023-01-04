@@ -817,7 +817,7 @@ class WP_HTML_Tag_Processor_Test extends WP_UnitTestCase {
 	 * When both set_attribute('class', $value) and add_class( $different_value ) are called,
 	 * the final class name should be $value. In other words, the `add_class` call should be ignored,
 	 * and the `set_attribute` call should win. This holds regardless of the order in which these methods
-	 * are called, and even before get_updated_html is called.
+	 * are called, and even before `get_updated_html` is called.
 	 *
 	 * @ticket 56299
 	 *
