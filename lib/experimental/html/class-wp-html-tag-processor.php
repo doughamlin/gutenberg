@@ -1407,7 +1407,8 @@ class WP_HTML_Tag_Processor {
 			}
 
 			// $attribute is a 'name="value"' string, so we extract the value.
-			return substr( $attribute, strlen( $comparable ) + 2, -1 );
+			$value = substr( $attribute, strlen( $comparable ) + 2, -1 );
+			return html_entity_decode( $value );
 		}
 
 		if ( ! isset( $this->attributes[ $comparable ] ) ) {
