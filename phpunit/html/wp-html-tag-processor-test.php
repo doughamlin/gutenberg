@@ -814,6 +814,51 @@ class WP_HTML_Tag_Processor_Test extends WP_UnitTestCase {
 	}
 
 	/**
+	 * When both set_attribute('class', $value) and add_class( $different_value ) are called,
+	 * the final class name should be $value. In other words, the `add_class` call should be ignored,
+	 * and the `set_attribute` call should win. This holds regardless of the order in which these methods
+	 * are called, and even before get_updated_html is called.
+	 *
+	 * @ticket 56299
+	 *
+	 * @covers add_class
+	 * @covers set_attribute
+	 * @covers get_attribute
+	 * @covers get_updated_html
+	 */
+	public function test_set_attribute_takes_priority_over_add_class_even_before_updating() {
+		$p = new WP_HTML_Tag_Processor( self::HTML_WITH_CLASSES );
+		$p->next_tag();
+		$p->add_class( 'add_class' );
+		$p->set_attribute( 'class', 'set_attribute' );
+		$this->assertSame(
+			'set_attribute',
+			$p->get_attribute( 'class' ),
+			'Calling get_attribute after updating first tag\'s attributes did not return the expected class name'
+		);
+		$this->assertSame(
+			'<div class="set_attribute" id="first"><span class="not-main bold with-border" id="second">Text</span></div>',
+			$p->get_updated_html(),
+			'Calling get_updated_html after updating first tag\'s attributes did not return the expected HTML'
+		);
+
+		$p = new WP_HTML_Tag_Processor( self::HTML_WITH_CLASSES );
+		$p->next_tag();
+		$p->set_attribute( 'class', 'set_attribute' );
+		$p->add_class( 'add_class' );
+		$this->assertSame(
+			'set_attribute',
+			$p->get_attribute( 'class' ),
+			'Calling get_attribute after updating first tag\'s attributes did not return the expected class name'
+		);
+		$this->assertSame(
+			'<div class="set_attribute" id="first"><span class="not-main bold with-border" id="second">Text</span></div>',
+			$p->get_updated_html(),
+			'Calling get_updated_html after updating second tag\'s attributes did not return the expected HTML'
+		);
+	}
+
+	/**
 	 * @ticket 56299
 	 *
 	 * @covers set_attribute
