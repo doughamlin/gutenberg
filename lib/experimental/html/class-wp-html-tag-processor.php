@@ -1398,6 +1398,10 @@ class WP_HTML_Tag_Processor {
 
 		$comparable = strtolower( $name );
 
+		if ( 'class' === $name ) {
+			$this->class_name_updates_to_attributes_updates();
+		}
+
 		// If we have an update for this attribute, return the updated value.
 		if ( isset( $this->attribute_updates[ $comparable ] ) ) {
 			$attribute = trim( $this->attribute_updates[ $comparable ]->text );
