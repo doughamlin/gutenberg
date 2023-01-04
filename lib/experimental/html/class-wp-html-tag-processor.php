@@ -1399,7 +1399,7 @@ class WP_HTML_Tag_Processor {
 		$comparable = strtolower( $name );
 
 		// If we have an update for this attribute, return the updated value.
-		if ( isset ( $this->attribute_updates[ $comparable ] ) ) {
+		if ( isset( $this->attribute_updates[ $comparable ] ) ) {
 			$attribute = trim( $this->attribute_updates[ $comparable ]->text );
 			// Is this a boolean attribute?
 			if ( $attribute === $comparable ) {
