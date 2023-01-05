@@ -789,12 +789,12 @@ class WP_HTML_Tag_Processor_Test extends WP_UnitTestCase {
 		$this->assertSame(
 			'<div class="set_attribute" id="first"><span class="not-main bold with-border" id="second">Text</span></div>',
 			$p->get_updated_html(),
-			'Calling get_updated_html after updating first tag\'s attributes did not return the expected HTML'
+			"Calling get_updated_html after updating first tag's attributes did not return the expected HTML"
 		);
 		$this->assertSame(
 			'set_attribute',
 			$p->get_attribute( 'class' ),
-			'Calling get_attribute after updating first tag\'s attributes did not return the expected class name'
+			"Calling get_attribute after updating first tag's attributes did not return the expected class name"
 		);
 
 		$p = new WP_HTML_Tag_Processor( self::HTML_WITH_CLASSES );
@@ -804,12 +804,12 @@ class WP_HTML_Tag_Processor_Test extends WP_UnitTestCase {
 		$this->assertSame(
 			'<div class="set_attribute" id="first"><span class="not-main bold with-border" id="second">Text</span></div>',
 			$p->get_updated_html(),
-			'Calling get_updated_html after updating first tag\'s attributes did not return the expected HTML'
+			"Calling get_updated_html after updating first tag's attributes did not return the expected HTML"
 		);
 		$this->assertSame(
 			'set_attribute',
 			$p->get_attribute( 'class' ),
-			'Calling get_attribute after updating first tag\'s attributes did not return the expected class name'
+			"Calling get_attribute after updating first tag's attributes did not return the expected class name"
 		);
 	}
 
@@ -834,12 +834,12 @@ class WP_HTML_Tag_Processor_Test extends WP_UnitTestCase {
 		$this->assertSame(
 			'set_attribute',
 			$p->get_attribute( 'class' ),
-			'Calling get_attribute after updating first tag\'s attributes did not return the expected class name'
+			"Calling get_attribute after updating first tag's attributes did not return the expected class name"
 		);
 		$this->assertSame(
 			'<div class="set_attribute" id="first"><span class="not-main bold with-border" id="second">Text</span></div>',
 			$p->get_updated_html(),
-			'Calling get_updated_html after updating first tag\'s attributes did not return the expected HTML'
+			"Calling get_updated_html after updating first tag's attributes did not return the expected HTML"
 		);
 
 		$p = new WP_HTML_Tag_Processor( self::HTML_WITH_CLASSES );
@@ -849,12 +849,12 @@ class WP_HTML_Tag_Processor_Test extends WP_UnitTestCase {
 		$this->assertSame(
 			'set_attribute',
 			$p->get_attribute( 'class' ),
-			'Calling get_attribute after updating first tag\'s attributes did not return the expected class name'
+			"Calling get_attribute after updating first tag's attributes did not return the expected class name"
 		);
 		$this->assertSame(
 			'<div class="set_attribute" id="first"><span class="not-main bold with-border" id="second">Text</span></div>',
 			$p->get_updated_html(),
-			'Calling get_updated_html after updating first tag\'s attributes did not return the expected HTML'
+			"Calling get_updated_html after updating first tag's attributes did not return the expected HTML"
 		);
 	}
 
