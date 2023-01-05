@@ -75,6 +75,7 @@ require __DIR__ . '/compat/wordpress-6.1/template-parts-screen.php';
 require __DIR__ . '/compat/wordpress-6.1/theme.php';
 
 // WordPress 6.2 compat.
+require __DIR__ . '/compat/wordpress-6.2/blocks.php';
 require __DIR__ . '/compat/wordpress-6.2/script-loader.php';
 require __DIR__ . '/compat/wordpress-6.2/block-template-utils.php';
 require __DIR__ . '/compat/wordpress-6.2/get-global-styles-and-settings.php';
@@ -135,3 +136,4 @@ require __DIR__ . '/block-supports/layout.php';
 require __DIR__ . '/block-supports/spacing.php';
 require __DIR__ . '/block-supports/dimensions.php';
 require __DIR__ . '/block-supports/duotone.php';
+require __DIR__ . '/block-supports/shadow.php';
