@@ -39,9 +39,14 @@ jobs:
                     - '8.1'
                     - '8.2'
                 multisite: [false, true]
+                wordpress: ['WordPress/WordPress']
+                include:
+                    - php: '7.4'
+                      wordpress: 'WordPress/WordPress#6.0-branch'
 
         env:
             WP_ENV_PHP_VERSION: ${{ matrix.php }}
+            WP_ENV_CORE: ${{ matrix.wordpress }}
 
         steps:
             - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # v3.1.0
