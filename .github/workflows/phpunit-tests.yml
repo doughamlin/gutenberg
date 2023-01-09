@@ -21,7 +21,7 @@ concurrency:
 
 jobs:
     test-php:
-        name: ${{ matrix.php }}${{ matrix.multisite && ' multisite' || '' }} on ubuntu-latest
+        name: ${{ matrix.php }}${{ matrix.multisite && ' multisite' || '' }}${{ matrix.wordpress != '' && ' WP ' || '' }}${{ matrix.wordpress }} on ubuntu-latest
         runs-on: ubuntu-latest
         timeout-minutes: 20
         if: ${{ github.repository == 'WordPress/gutenberg' || github.event_name == 'pull_request' }}
