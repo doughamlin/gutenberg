@@ -658,6 +658,9 @@ describe( 'Multi-block selection', () => {
 	it( 'should gradually multi-select', async () => {
 		await clickBlockAppender();
 		await page.keyboard.type( '/columns' );
+		await page.waitForXPath(
+			'//button[@aria-selected="true"][text()="Columns"]'
+		);
 		await page.keyboard.press( 'Enter' );
 		// Select two columns.
 		await page.keyboard.press( 'ArrowRight' );
@@ -665,9 +668,13 @@ describe( 'Multi-block selection', () => {
 		// Navigate to appender.
 		await page.keyboard.press( 'ArrowRight' );
 		await page.keyboard.press( 'Enter' );
-		// Select a paragraph.
+		// Wait for inserter results to appear and then select a paragraph.
+		await page.waitForSelector(
+			'.block-editor-inserter__quick-inserter-results .block-editor-block-types-list__item'
+		);
 		await page.keyboard.press( 'Tab' );
 		await page.keyboard.press( 'Enter' );
+		// Type two paragraphs
 		await page.keyboard.type( '1' );
 		await page.keyboard.press( 'Enter' );
 		await page.keyboard.type( '2' );
