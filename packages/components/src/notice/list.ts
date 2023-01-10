@@ -6,7 +6,7 @@ import classnames from 'classnames';
 /**
  * Internal dependencies
  */
-import Notice from './';
+import Notice from '.';
 
 const noop = () => {};
 
