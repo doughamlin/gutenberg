@@ -100,6 +100,11 @@ function Notice( {
 								noDefaultClasses = false,
 								onClick,
 								url,
+							}: NoticeProps[ 'actions' ][ number ] & {
+								// `isPrimary` is a legacy prop included for
+								// backcompat, but `variant` should be used
+								// instead.
+								isPrimary?: boolean;
 							},
 							index
 						) => {

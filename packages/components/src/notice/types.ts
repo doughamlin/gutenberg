@@ -4,8 +4,15 @@ type CommonNoticeActionProps = {
 	noDefaultClasses?: boolean;
 	variant?: 'primary';
 };
-type NoticeActionWithURL = CommonNoticeActionProps & { url: string };
+// `url` and `onClick` can both be provided, but `url` takes precedence. If
+// `url` is provided, the action's button will be rendered as an anchor and
+// `onClick` will be ignored.
+type NoticeActionWithURL = CommonNoticeActionProps & {
+	url: string;
+	onClick?: () => void;
+};
 type NoticeActionWithOnClick = CommonNoticeActionProps & {
+	url?: string;
 	onClick: () => void;
 };
 
