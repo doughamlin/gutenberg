@@ -35,9 +35,9 @@ export function useHasShadowControl( name ) {
 	return supports.includes( 'shadow' );
 }
 
-export default function ShadowPanel( { name } ) {
-	const [ shadow, setShadow ] = useStyle( 'shadow', name );
-	const [ userShadow ] = useStyle( 'shadow', name, 'user' );
+export default function ShadowPanel( { name, variationPath = '' } ) {
+	const [ shadow, setShadow ] = useStyle( `${ variationPath }shadow`, name );
+	const [ userShadow ] = useStyle( `${ variationPath }shadow`, name, 'user' );
 	const hasShadow = () => !! userShadow;
 
 	const resetShadow = () => setShadow( undefined );

@@ -23,7 +23,9 @@ function ScreenBorder( { name, variationPath = '' } ) {
 			{ hasBorderPanel && (
 				<BorderPanel name={ name } variationPath={ variationPath } />
 			) }
-			{ hasShadowPanel && <ShadowPanel name={ name } /> }
+			{ hasShadowPanel && (
+				<ShadowPanel name={ name } variationPath={ variationPath } />
+			) }
 		</>
 	);
 }
