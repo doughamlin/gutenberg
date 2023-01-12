@@ -23,6 +23,10 @@ class Render_Block_Heading_Test extends WP_UnitTestCase {
 		$this->assertEquals( $expected_result, $actual );
 	}
 
+	public function test_fails_on_php_72() {
+		$this->fail( 'PHP 7.2' );
+	}
+
 	public function add_css_class_test_examples() {
 		return array(
 			'should add a class name to a vanilla h2 element' => array(
