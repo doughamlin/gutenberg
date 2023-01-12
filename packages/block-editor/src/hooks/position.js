@@ -300,10 +300,7 @@ export const withInspectorControls = createHigherOrderComponent(
 
 		return [
 			showPositionControls && (
-				<InspectorControls
-					key="position"
-					__experimentalGroup="position"
-				>
+				<InspectorControls key="position" group="position">
 					<PositionEdit { ...props } />
 				</InspectorControls>
 			),
