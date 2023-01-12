@@ -51,8 +51,8 @@ jobs:
             - name: Running the date tests
               run: npm run test:unit:date -- --ci --maxWorkers=2 --cacheDirectory="$HOME/.jest-cache"
 
-    unit-php:
-        name: PHP-${{ matrix.php }}${{ matrix.multisite && ' multisite' || '' }} on ubuntu-latest
+    test-php:
+        name: PHP ${{ matrix.php }}${{ matrix.multisite && ' multisite' || '' }} on ubuntu-latest
         runs-on: ubuntu-latest
         timeout-minutes: 20
         if: ${{ github.repository == 'WordPress/gutenberg' || github.event_name == 'pull_request' }}
@@ -75,6 +75,7 @@ jobs:
             WP_ENV_PHP_VERSION: ${{ matrix.php }}
 
         steps:
+            - run: 'echo "This step is going to be removed. All PHPUnit checks have been moved to phpunit-tests.yml."'
             - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # v3.1.0
 
             - name: Set up Node.js
@@ -155,6 +156,13 @@ jobs:
             - name: Running multisite unit tests
               if: ${{ matrix.multisite }}
               run: npm run test:unit:php:multisite
+
+    unit-php:
+        name: PHP
+        runs-on: ubuntu-latest
+        needs: test-php
+        steps:
+            - run: 'echo "This step is going to be removed. All PHPUnit checks have been moved to phpunit-tests.yml."'
 
     mobile-unit-js:
         name: Mobile
