@@ -2,7 +2,11 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { __experimentalColorGradientControl as ColorGradientControl } from '@wordpress/block-editor';
+import {
+	__experimentalColorGradientControl as ColorGradientControl,
+	useGlobalStylesSetting as useSetting,
+	useStyle,
+} from '@wordpress/block-editor';
 
 /**
  * Internal dependencies
@@ -12,8 +16,6 @@ import {
 	getSupportedGlobalStylesPanels,
 	useColorsPerOrigin,
 	useGradientsPerOrigin,
-	useSetting,
-	useStyle,
 } from './hooks';
 
 function ScreenBackgroundColor( { name, variationPath = '' } ) {

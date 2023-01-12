@@ -9,11 +9,7 @@ import { mergeWith, isEmpty, mapValues } from 'lodash';
 import { useMemo, useCallback } from '@wordpress/element';
 import { useSelect, useDispatch } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
-
-/**
- * Internal dependencies
- */
-import { GlobalStylesContext } from './context';
+import { GlobalStylesContext } from '@wordpress/block-editor';
 
 function mergeTreesCustomizer( _, srcValue ) {
 	// We only pass as arrays the presets,

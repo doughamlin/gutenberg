@@ -3,11 +3,7 @@
  */
 import { TextareaControl, Panel, PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-
-/**
- * Internal dependencies
- */
-import { useStyle } from './hooks';
+import { useStyle } from '@wordpress/block-editor';
 
 function CustomCSSControl() {
 	const [ customCSS, setCustomCSS ] = useStyle( 'css' );
