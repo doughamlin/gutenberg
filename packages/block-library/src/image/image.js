@@ -437,7 +437,7 @@ export default function Image( {
 					/>
 				</PanelBody>
 			</InspectorControls>
-			<InspectorControls __experimentalGroup="advanced">
+			<InspectorControls group="advanced">
 				<TextControl
 					label={ __( 'Title attribute' ) }
 					value={ title || '' }

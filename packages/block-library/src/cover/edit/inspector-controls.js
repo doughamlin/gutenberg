@@ -225,7 +225,7 @@ export default function CoverInspectorControls( {
 					</PanelBody>
 				) }
 			</InspectorControls>
-			<InspectorControls __experimentalGroup="color">
+			<InspectorControls group="color">
 				<ColorGradientSettingsDropdown
 					__experimentalIsRenderedInSidebar
 					settings={ [
@@ -281,7 +281,7 @@ export default function CoverInspectorControls( {
 					/>
 				</ToolsPanelItem>
 			</InspectorControls>
-			<InspectorControls __experimentalGroup="dimensions">
+			<InspectorControls group="dimensions">
 				<ToolsPanelItem
 					hasValue={ () => !! minHeight }
 					label={ __( 'Minimum height' ) }

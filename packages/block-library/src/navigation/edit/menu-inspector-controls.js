@@ -133,7 +133,7 @@ const MenuInspectorControls = ( props ) => {
 		: undefined;
 
 	return (
-		<InspectorControls __experimentalGroup={ menuControlsSlot }>
+		<InspectorControls group={ menuControlsSlot }>
 			<PanelBody
 				title={
 					isOffCanvasNavigationEditorEnabled ? null : __( 'Menu' )
