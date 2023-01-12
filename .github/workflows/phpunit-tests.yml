@@ -20,7 +20,7 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
-    test-php:
+    unit-php:
         name: ${{ matrix.php }}${{ matrix.multisite && ' multisite' || '' }} on ubuntu-latest
         runs-on: ubuntu-latest
         timeout-minutes: 20
