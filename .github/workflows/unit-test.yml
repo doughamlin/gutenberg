@@ -53,7 +53,9 @@ jobs:
 
     unit-php:
         name: PHP
-        if: false
+        runs-on: ubuntu-latest
+        steps:
+            - run: 'echo "This step is going to be removed. All PHPUnit checks have been moved to phpunit-tests.yml."'
 
     mobile-unit-js:
         name: Mobile
