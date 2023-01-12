@@ -51,6 +51,10 @@ jobs:
             - name: Running the date tests
               run: npm run test:unit:date -- --ci --maxWorkers=2 --cacheDirectory="$HOME/.jest-cache"
 
+    unit-php:
+        name: PHP
+        if: false
+
     mobile-unit-js:
         name: Mobile
         runs-on: ubuntu-latest
