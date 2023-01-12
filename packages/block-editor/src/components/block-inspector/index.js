@@ -201,20 +201,20 @@ const BlockInspector = ( { showNoBlockSelectedMessage = true } ) => {
 					<>
 						<InspectorControls.Slot />
 						<InspectorControls.Slot
-							__experimentalGroup="color"
+							group="color"
 							label={ __( 'Color' ) }
 							className="color-block-support-panel__inner-wrapper"
 						/>
 						<InspectorControls.Slot
-							__experimentalGroup="typography"
+							group="typography"
 							label={ __( 'Typography' ) }
 						/>
 						<InspectorControls.Slot
-							__experimentalGroup="dimensions"
+							group="dimensions"
 							label={ __( 'Dimensions' ) }
 						/>
 						<InspectorControls.Slot
-							__experimentalGroup="border"
+							group="border"
 							label={ __( 'Border' ) }
 						/>
 					</>
@@ -362,20 +362,20 @@ const BlockInspectorSingleBlock = ( { clientId, blockName } ) => {
 					) }
 					<InspectorControls.Slot />
 					<InspectorControls.Slot
-						__experimentalGroup="color"
+						group="color"
 						label={ __( 'Color' ) }
 						className="color-block-support-panel__inner-wrapper"
 					/>
 					<InspectorControls.Slot
-						__experimentalGroup="typography"
+						group="typography"
 						label={ __( 'Typography' ) }
 					/>
 					<InspectorControls.Slot
-						__experimentalGroup="dimensions"
+						group="dimensions"
 						label={ __( 'Dimensions' ) }
 					/>
 					<InspectorControls.Slot
-						__experimentalGroup="border"
+						group="border"
 						label={ __( 'Border' ) }
 					/>
 					<PositionControls />
