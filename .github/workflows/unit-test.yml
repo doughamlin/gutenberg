@@ -75,7 +75,6 @@ jobs:
             WP_ENV_PHP_VERSION: ${{ matrix.php }}
 
         steps:
-            - run: 'echo "This step is going to be removed. All PHPUnit checks have been moved to phpunit-tests.yml."'
             - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # v3.1.0
 
             - name: Set up Node.js
@@ -162,7 +161,7 @@ jobs:
         runs-on: ubuntu-latest
         needs: test-php
         steps:
-            - run: 'echo "This step is going to be removed . All PHPUnit checks have been moved to the test-php job."'
+            - run: 'echo "This job is going to be removed. All PHPUnit checks have been moved to the test-php job."'
 
     mobile-unit-js:
         name: Mobile
