@@ -66,4 +66,9 @@ export type NoticeProps = {
 	 * An array of action objects.
 	 */
 	actions: Array< NoticeActionWithURL | NoticeActionWithOnClick >;
+	/**
+	 * Determines whether or not the message should be parsed as custom HTML
+	 * instead of a string.
+	 */
+	__unstableHTML?: boolean;
 };

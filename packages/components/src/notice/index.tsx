@@ -75,10 +75,6 @@ function Notice( {
 		}
 	);
 
-	if ( __unstableHTML ) {
-		children = <RawHTML>{ children }</RawHTML>;
-	}
-
 	const onDismissNotice = ( event: SyntheticEvent ) => {
 		event?.preventDefault?.();
 		onDismiss();
@@ -88,7 +84,11 @@ function Notice( {
 	return (
 		<div className={ classes }>
 			<div className="components-notice__content">
-				{ children }
+				{ ! __unstableHTML ? (
+					children
+				) : (
+					<RawHTML>{ children }</RawHTML>
+				) }
 				<div className="components-notice__actions">
 					{ actions.map(
 						(
