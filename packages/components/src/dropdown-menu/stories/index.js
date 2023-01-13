@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import { text, boolean } from '@storybook/addon-knobs';
-
-/**
  * Internal dependencies
  */
 import DropdownMenu from '../';
@@ -11,42 +6,41 @@ import DropdownMenu from '../';
 /**
  * WordPress dependencies
  */
-import { menu, arrowUp, arrowDown } from '@wordpress/icons';
+import { menu, arrowUp, arrowDown, chevronDown } from '@wordpress/icons';
 
 export default {
 	title: 'Components/DropdownMenu',
 	component: DropdownMenu,
+	argTypes: {
+		icon: {
+			options: [ 'menu', 'chevronDown' ],
+			mapping: { menu, chevronDown },
+			control: { type: 'select' },
+		},
+	},
 	parameters: {
-		knobs: { disable: false },
+		controls: { expanded: true },
+		docs: { source: { state: 'open' } },
 	},
 };
 
-export const _default = () => {
-	const label = text( 'Label', 'Select a direction.' );
-	const firstMenuItemLabel = text( 'First Menu Item Label', 'Up' );
-	const secondMenuItemLabel = text( 'First Menu Item Label', 'Down' );
-	const toggleButtonTootip = boolean(
-		'Show tooltip on a toggle button',
-		true
-	);
+const Template = ( props ) => <DropdownMenu { ...props } />;
 
-	const controls = [
+export const Default = Template.bind( {} );
+Default.args = {
+	label: 'Select a direction.',
+	icon: menu,
+	controls: [
 		{
-			title: firstMenuItemLabel,
+			title: 'First Menu Item Label',
 			icon: arrowUp,
 		},
 		{
-			title: secondMenuItemLabel,
+			title: 'Second Menu Item Label',
 			icon: arrowDown,
 		},
-	];
-
-	return (
-		<DropdownMenu
-			icon={ menu }
-			label={ label }
-			controls={ controls }
-			toggleProps={ { showTooltip: toggleButtonTootip } }
-		/>
-	);
+	],
+	toggleProps: {
+		showTooltip: true,
+	},
 };
