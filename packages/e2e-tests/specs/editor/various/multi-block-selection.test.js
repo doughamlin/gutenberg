@@ -395,7 +395,7 @@ describe( 'Multi-block selection', () => {
 		await page.keyboard.press( 'Enter' );
 		await page.keyboard.type( '/group' );
 		await page.waitForXPath(
-			`//*[contains(@class, "components-autocomplete__result") and contains(@class, "is-selected") and contains(text(), 'Group')]`
+			'//button[@aria-selected="true"][text()="Group"]'
 		);
 		await page.keyboard.press( 'Enter' );
 
@@ -712,6 +712,9 @@ describe( 'Multi-block selection', () => {
 		await page.keyboard.press( 'Enter' );
 		// Add a list.
 		await page.keyboard.type( '/list' );
+		await page.waitForXPath(
+			'//button[@aria-selected="true"][text()="List"]'
+		);
 		await page.keyboard.press( 'Enter' );
 		await page.keyboard.type( '1' );
 
@@ -931,6 +934,9 @@ describe( 'Multi-block selection', () => {
 		await page.keyboard.press( 'Enter' );
 		await page.keyboard.press( 'Enter' );
 		await page.keyboard.type( '/hr' );
+		await page.waitForXPath(
+			'//button[@aria-selected="true"][text()="Separator"]'
+		);
 		await page.keyboard.press( 'Enter' );
 		await page.keyboard.press( 'ArrowUp' );
 		await page.keyboard.press( 'ArrowUp' );
